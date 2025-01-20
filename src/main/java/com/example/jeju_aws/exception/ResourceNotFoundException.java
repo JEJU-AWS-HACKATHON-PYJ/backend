@@ -1,4 +1,4 @@
-package main.java.com.example.jeju_aws.exception;
+package com.example.jeju_aws.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
