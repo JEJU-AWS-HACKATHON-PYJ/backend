@@ -46,4 +46,17 @@ public class FarmService {
     public Optional<Farm> getFarmById(Long id) {
         return farmRepository.findById(id);
     }
+
+    // 즐겨찾기 상태 업데이트
+    public boolean updateFavoriteStatus(Long farmId, boolean isFavorite) {
+        Optional<Farm> optionalFarm = farmRepository.findById(farmId);
+        if (optionalFarm.isPresent()) {
+            Farm farm = optionalFarm.get();
+            farm.setFavorite(isFavorite);
+            farmRepository.save(farm);
+            return true;
+        }
+        return false;
+    }
+
 }

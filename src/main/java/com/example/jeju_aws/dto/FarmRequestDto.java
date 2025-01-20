@@ -26,6 +26,8 @@ public class FarmRequestDto {
     private String productName2;  // 판매 상품 2 이름
     private BigDecimal productPrice2;  // 판매 상품 2 가격
 
+    private Boolean isFavorite;
+
     // Getters and Setters
     public String getName() {
         return name;
@@ -137,5 +139,12 @@ public class FarmRequestDto {
 
     public void setProductPrice2(BigDecimal productPrice2) {
         this.productPrice2 = productPrice2;
+    }
+    public Boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(Boolean isFavorite) {
+        this.isFavorite = isFavorite;
     }
 }

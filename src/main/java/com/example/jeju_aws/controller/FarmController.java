@@ -56,4 +56,21 @@ public class FarmController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    // 즐겨찾기 상태 업데이트
+    @Operation(summary = "즐겨찾기 상태 업데이트", description = "농장의 즐겨찾기 상태를 업데이트합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "즐겨찾기 상태 업데이트 성공"),
+            @ApiResponse(responseCode = "404", description = "농장 정보를 찾을 수 없음")
+    })
+    @PostMapping("/{farmId}/favorite")
+    public ResponseEntity<Void> updateFavoriteStatus(@PathVariable Long farmId, @RequestBody @Valid FarmRequestDto farmRequestDto) {
+        boolean isUpdated = farmService.updateFavoriteStatus(farmId, farmRequestDto.isFavorite());
+        if (isUpdated) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
