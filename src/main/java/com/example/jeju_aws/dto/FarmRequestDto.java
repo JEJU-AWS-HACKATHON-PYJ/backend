@@ -1,6 +1,6 @@
 package com.example.jeju_aws.dto;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class FarmRequestDto {

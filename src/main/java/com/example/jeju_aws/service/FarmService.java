@@ -1,8 +1,8 @@
-package main.java.com.example.jeju_aws.service;
+package com.example.jeju_aws.service;
 
-import main.java.com.example.jeju_aws.dto.FarmRequestDto;
-import main.java.com.example.jeju_aws.entity.Farm;
-import main.java.com.example.jeju_aws.repository.FarmRepository;
+import com.example.jeju_aws.dto.FarmRequestDto;
+import com.example.jeju_aws.entity.Farm;
+import com.example.jeju_aws.repository.FarmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

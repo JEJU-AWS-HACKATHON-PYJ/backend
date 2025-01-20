@@ -1,6 +1,6 @@
 package com.example.jeju_aws.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
 
