@@ -17,11 +17,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/farms")
 @Tag(name = "Farm API", description = "농장 정보 관리 API")
+@Slf4j
 public class FarmController {
 
     @Autowired
@@ -36,6 +39,7 @@ public class FarmController {
     })
     @PostMapping
     public ResponseEntity<Farm> createFarm(@RequestBody @Valid FarmRequestDto farmRequestDto) {
+        log.info("farmRequestDto: {}", farmRequestDto);
         Farm createdFarm = farmService.createFarm(farmRequestDto);
         return new ResponseEntity<>(createdFarm, HttpStatus.CREATED);
     }
@@ -64,8 +68,24 @@ public class FarmController {
             @ApiResponse(responseCode = "404", description = "농장 정보를 찾을 수 없음")
     })
     @PostMapping("/{farmId}/favorite")
-    public ResponseEntity<Void> updateFavoriteStatus(@PathVariable Long farmId, @RequestBody @Valid FarmRequestDto farmRequestDto) {
-        boolean isUpdated = farmService.updateFavoriteStatus(farmId, farmRequestDto.isFavorite());
+    public ResponseEntity<Void> updateFavoriteStatus(@PathVariable Long farmId, @RequestBody FarmRequestDto farmRequestDto) {
+        boolean isUpdated = farmService.updateFavoriteStatus(farmId, farmRequestDto.getFavoriteYn());
+        if (isUpdated) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // 농장 활성화 상태 업데이트
+    @Operation(summary = "농장 활성화 상태 업데이트", description = "농장의 활성화 상태를 업데이트합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "활성화 상태 업데이트 성공"),
+            @ApiResponse(responseCode = "404", description = "농장 정보를 찾을 수 없음")
+    })
+    @PostMapping("/{farmId}/active")
+    public ResponseEntity<Void> updateActiveStatus(@PathVariable Long farmId, @RequestBody FarmRequestDto farmRequestDto) {
+        boolean isUpdated = farmService.updateActiveStatus(farmId, farmRequestDto.getActiveYn());
         if (isUpdated) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
