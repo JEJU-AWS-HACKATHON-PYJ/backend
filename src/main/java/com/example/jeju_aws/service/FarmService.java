@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+
 @Service
 public class FarmService {
 
@@ -27,8 +28,17 @@ public class FarmService {
         farm.setLongitude(farmRequestDto.getLongitude());
         farm.setKeywords(farmRequestDto.getKeywords());
         farm.setImageUrl(farmRequestDto.getImageUrl());
+        
+        // 추가된 필드들
+        farm.setHomepageLink(farmRequestDto.getHomepageLink());
+        farm.setProductName1(farmRequestDto.getProductName1());
+        farm.setProductPrice1(farmRequestDto.getProductPrice1());
+        farm.setProductName2(farmRequestDto.getProductName2());
+        farm.setProductPrice2(farmRequestDto.getProductPrice2());
+
         farm.setCreatedAt(LocalDateTime.now());
         farm.setUpdatedAt(LocalDateTime.now());
+
         return farmRepository.save(farm);
     }
 
